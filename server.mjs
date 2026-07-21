@@ -27,6 +27,10 @@ import { createServer } from "node:http";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+
+const execFileAsync = promisify(execFile);
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PROVIDERS = JSON.parse(readFileSync(join(__dirname, "providers.json"), "utf8"));
@@ -103,11 +107,32 @@ async function callOllamaLocal(provider, prompt) {
   });
 }
 
+// Shells out to the Claude Code CLI baked into this image (see Dockerfile)
+// instead of hitting an HTTP API -- it authenticates via a long-lived
+// CLAUDE_CODE_OAUTH_TOKEN (Pro/Max subscription), not a per-request API
+// key, and the prompt is passed as an argv element (never shell-interpolated)
+// so it can't be used to inject extra CLI flags or commands.
+async function callClaudeCode(provider, apiKey, prompt) {
+  return withTimeout(provider.timeoutMs, async (signal) => {
+    const args = ["-p", prompt, "--output-format", "text"];
+    if (provider.model) args.push("--model", provider.model);
+    const { stdout, stderr } = await execFileAsync("claude", args, {
+      signal,
+      maxBuffer: 10 * 1024 * 1024,
+      env: { ...process.env, CLAUDE_CODE_OAUTH_TOKEN: apiKey },
+    });
+    const text = stdout.trim();
+    if (!text) throw new Error(stderr?.trim() || "Claude Code produced no output.");
+    return text;
+  });
+}
+
 async function dispatch(provider, apiKey, prompt) {
   switch (provider.schema) {
     case "openai": return callOpenAiCompatible(provider, apiKey, prompt);
     case "gemini": return callGemini(provider, apiKey, prompt);
     case "ollama-local": return callOllamaLocal(provider, prompt);
+    case "claude-code": return callClaudeCode(provider, apiKey, prompt);
     default: throw new Error(`No call handler for schema "${provider.schema}".`);
   }
 }
