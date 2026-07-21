@@ -11,5 +11,6 @@
   "fireworks": { "schema": "openai", "endpoint": "https://api.fireworks.ai/inference/v1/chat/completions", "model": "accounts/fireworks/models/llama-v3p3-70b-instruct", "timeoutMs": 30000, "maxRetries": 1, "credentialEnvVar": "FIREWORKS_API_KEY" },
   "perplexity": { "schema": "openai", "endpoint": "https://api.perplexity.ai/chat/completions", "model": "sonar", "timeoutMs": 30000, "maxRetries": 1, "credentialEnvVar": "PERPLEXITY_API_KEY" },
   "cohere": { "schema": "openai", "endpoint": "https://api.cohere.ai/compatibility/v1/chat/completions", "model": "command-r-plus", "timeoutMs": 30000, "maxRetries": 1, "credentialEnvVar": "COHERE_API_KEY" },
-  "claude-code": { "schema": "claude-code", "model": "sonnet", "timeoutMs": 120000, "maxRetries": 0, "credentialEnvVar": "CLAUDE_CODE_OAUTH_TOKEN" }
+  "claude-code": { "schema": "claude-code", "model": "sonnet", "timeoutMs": 120000, "maxRetries": 0, "credentialEnvVar": "CLAUDE_CODE_OAUTH_TOKEN" },
+  "ollama": { "schema": "ollama-local", "endpoint": "http://ollama-f9iw-ollama-1:11434/api/generate", "model": "dolphin-llama3:8b", "timeoutMs": 90000, "maxRetries": 0 }
 }

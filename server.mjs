@@ -150,8 +150,8 @@ async function callOne(providerId, prompt) {
     const provider = PROVIDERS[providerId];
     if (!provider) return { ok: false, providerId, error: `Unknown provider id "${providerId}". Known: ${Object.keys(PROVIDERS).join(", ")}`, ms: 0 };
 
-    const apiKey = process.env[provider.credentialEnvVar];
-    if (!apiKey) {
+    const apiKey = provider.credentialEnvVar ? process.env[provider.credentialEnvVar] : undefined;
+    if (provider.credentialEnvVar && !apiKey) {
       return { ok: false, providerId, error: `${provider.credentialEnvVar} is not set in this service's environment.`, ms: 0 };
     }
 
