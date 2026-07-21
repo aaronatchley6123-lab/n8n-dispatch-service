@@ -1,0 +1,14 @@
+{
+  "openai": { "schema": "openai", "endpoint": "https://api.openai.com/v1/chat/completions", "model": "gpt-4o-mini", "timeoutMs": 30000, "maxRetries": 1, "credentialEnvVar": "OPENAI_API_KEY" },
+  "deepseek": { "schema": "openai", "endpoint": "https://api.deepseek.com/chat/completions", "model": "deepseek-chat", "timeoutMs": 30000, "maxRetries": 1, "credentialEnvVar": "DEEPSEEK_API_KEY" },
+  "kimi": { "schema": "openai", "endpoint": "https://api.moonshot.ai/v1/chat/completions", "model": "kimi-k2-0711-preview", "timeoutMs": 30000, "maxRetries": 1, "credentialEnvVar": "KIMI_API_KEY" },
+  "gemini": { "schema": "gemini", "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent", "timeoutMs": 30000, "maxRetries": 1, "credentialEnvVar": "GEMINI_API_KEY" },
+  "grok": { "schema": "openai", "endpoint": "https://api.x.ai/v1/chat/completions", "model": "grok-beta", "timeoutMs": 30000, "maxRetries": 1, "credentialEnvVar": "GROK_API_KEY" },
+  "openrouter": { "schema": "openai", "endpoint": "https://openrouter.ai/api/v1/chat/completions", "model": "openai/gpt-4o-mini", "timeoutMs": 30000, "maxRetries": 1, "credentialEnvVar": "OPENROUTER_API_KEY" },
+  "mistral": { "schema": "openai", "endpoint": "https://api.mistral.ai/v1/chat/completions", "model": "mistral-large-latest", "timeoutMs": 30000, "maxRetries": 1, "credentialEnvVar": "MISTRAL_API_KEY" },
+  "groq": { "schema": "openai", "endpoint": "https://api.groq.com/openai/v1/chat/completions", "model": "llama-3.3-70b-versatile", "timeoutMs": 15000, "maxRetries": 1, "credentialEnvVar": "GROQ_API_KEY" },
+  "together": { "schema": "openai", "endpoint": "https://api.together.xyz/v1/chat/completions", "model": "meta-llama/Llama-3.3-70B-Instruct-Turbo", "timeoutMs": 30000, "maxRetries": 1, "credentialEnvVar": "TOGETHER_API_KEY" },
+  "fireworks": { "schema": "openai", "endpoint": "https://api.fireworks.ai/inference/v1/chat/completions", "model": "accounts/fireworks/models/llama-v3p3-70b-instruct", "timeoutMs": 30000, "maxRetries": 1, "credentialEnvVar": "FIREWORKS_API_KEY" },
+  "perplexity": { "schema": "openai", "endpoint": "https://api.perplexity.ai/chat/completions", "model": "sonar", "timeoutMs": 30000, "maxRetries": 1, "credentialEnvVar": "PERPLEXITY_API_KEY" },
+  "cohere": { "schema": "openai", "endpoint": "https://api.cohere.ai/compatibility/v1/chat/completions", "model": "command-r-plus", "timeoutMs": 30000, "maxRetries": 1, "credentialEnvVar": "COHERE_API_KEY" }
+}
